@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import { css } from "@emotion/core"
 import { rhythm } from "../utils/typography"
 import Layout from "../components/layout"
@@ -20,6 +20,7 @@ export default function Home({ data }) {
         <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
         {data.allMarkdownRemark.edges.map(({ node }) => (
           <div key={node.id}>
+            <Link to={node.field.slug}>
             <h3
               css={css`
                 margin-bottom: ${rhythm(1 / 4)};
@@ -35,6 +36,7 @@ export default function Home({ data }) {
               </span>
             </h3>
             <p>{node.excerpt}</p>
+            </Link>
           </div>
         ))}
       </div>
@@ -49,6 +51,9 @@ export const query = graphql`
       edges {
         node {
           id
+          fields {
+            slug
+          }
           frontmatter {
             title
             date(formatString: "DD MMMM, YYYY")
