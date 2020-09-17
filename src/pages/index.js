@@ -20,7 +20,7 @@ export default function Home({ data }) {
         <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
         {data.allMarkdownRemark.edges.map(({ node }) => (
           <div key={node.id}>
-            <Link to={node.field.slug}>
+            <Link to={node.fields.slug}>
             <h3
               css={css`
                 margin-bottom: ${rhythm(1 / 4)};
